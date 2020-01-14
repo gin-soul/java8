@@ -14,19 +14,22 @@ public class GenerateFile {
 
     public static void main(String[] args) {
         //8个字段
-        //S_CI_VB_CUSID0x03S_CI_VB_INCOME0x03S_CI_VB_AGE0x03S_CI_VB_UUID
+        //S_DC_VS_IDNOS_CI_VB_INCOMES_CI_VB_AGES_CI_VB_UUID
+        //"S_DC_VS_IDNO\u0003S_CI_VB_INCOME\u0003S_CI_VB_AGE\u0003S_CI_VB_UUID"
         Random random = new Random();
         long cusId = 360702199210311611L;
         String uuid = "bigdata00100433699f0a2c4909e8648";
         StringBuilder sb = new StringBuilder(200000);
-        for (int i = 1; i <= 4000000; i++) {
+        sb.append("S_DC_VS_IDNO").append("\u0003").append("S_CI_VB_INCOME").append("\u0003")
+                .append("S_CI_VB_AGE").append("\u0003").append("S_CI_VB_UUID").append("\r\n");
+        for (int i = 1; i <= 10002; i++) {
             //身份证
             //收入
             //年龄
             //填充数据
-            sb.append(cusId + i).append("0x03")
-                    .append(random.nextDouble() * 100000).append("0x03")
-                    .append(random.nextInt(20) + 10).append("0x03")
+            sb.append(cusId + i).append("\u0003")
+                    .append(random.nextDouble() * 100000).append("\u0003")
+                    .append(random.nextInt(20) + 10).append("\u0003")
                     .append(uuid).append("\r\n");
             if (i % 10000 == 0) {
                 appendMethodB("d:/var/big.txt", sb.toString());
