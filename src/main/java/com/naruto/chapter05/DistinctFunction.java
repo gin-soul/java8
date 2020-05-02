@@ -112,14 +112,14 @@ public class DistinctFunction {
 
     @Test
     public void distinctByProperty2() {
-        //第二种方法我们通过过滤来实现根据对象某个属性去重
+        //第二种方法通过过滤来实现根据对象某个属性去重
         List<HouseInfo> houseList = initList();
         System.out.print("去重前: ");
         System.out.println(JSONObject.toJSONString(houseList));
         houseList = houseList.stream().distinct().collect(Collectors.toList());
         System.out.print("distinct去重后: ");
         System.out.println(JSONObject.toJSONString(houseList));
-        // 这里我们将 distinctByKey() 方法作为 filter() 的参数，过滤掉那些不能加入到 set 的元素
+        //将 distinctByKey() 方法作为 filter() 的参数(Predicate: true,false)，过滤掉那些不能加入到 set 的元素
         houseList = houseList.stream()
                 .sorted(Comparator.comparing(e -> ((HouseInfo)e).getUpdateDate(), Comparator.nullsFirst(String::compareTo)).reversed())
                 .filter(distinctByKey(HouseInfo::getLiveAddr))
